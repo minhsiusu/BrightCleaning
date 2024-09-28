@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@primevue/themes": "^4.0.5",
+    "@romanran/vue-simple-calendar": "^1.4.2",
+    "@vue/compat": "^3.5.3",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "swiper": "^11.1.12",
+    "vue": "^3.2.13",
+    "vue-easy-lightbox": "^1.19.0",
+    "vue-functional-calendar": "^3.0.0",
+    "vue-router": "^4.4.0",
+    "vue-simple-calendar": "^7.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.12.16",
+    "@babel/preset-env": "^7.25.4",
+    "@primevue/nuxt-module": "^4.0.5",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "babel-loader": "^9.1.3",
+    "deepmerge": "^4.3.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.78.0",
+    "sass-loader": "^16.0.1"
+  }
+}
