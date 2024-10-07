@@ -23,26 +23,51 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ForgotPassword',
   data() {
     return {
-      email: '',
-      code: '',
-      newPassword: '',
-      confirmPassword: ''
+      email: '', // 使用者輸入的電子郵件或手機
+      code: '',  // 使用者輸入的驗證碼
+      newPassword: '',  // 新密碼
+      confirmPassword: ''  // 確認密碼
     };
   },
   methods: {
-    sendCode() {
-      alert('驗證碼已發送！');
+      // 發送驗證碼請求
+      sendCode() {
+      axios.post('/api/send-reset-code', { 
+        emailOrPhone: this.email 
+      })
+        .then(response => {
+          alert('驗證碼已發送到您的電子郵件或手機！', response.data);
+        })
+        .catch(error => {
+          console.error('發送驗證碼失敗:', error);
+          alert('驗證碼發送失敗，請檢查您輸入的電子郵件或手機號碼。');
+        });
     },
+    // 重置密碼
     resetPassword() {
-      if (this.newPassword === this.confirmPassword) {
-        alert('密碼已重置成功！');
-      } else {
+      if (this.newPassword !== this.confirmPassword) {
         alert('兩次輸入的密碼不一致！');
+        return;
       }
+
+      axios.post('/api/reset-password', {
+        emailOrPhone: this.email,
+        code: this.code,
+        newPassword: this.newPassword
+      })
+      .then(response => {
+        alert('密碼已成功重置！', response.data);
+      })
+      .catch(error => {
+        console.error('密碼重置失敗:', error);
+        alert('密碼重置失敗，請檢查驗證碼或其他資料。');
+      });
     }
   }
 };

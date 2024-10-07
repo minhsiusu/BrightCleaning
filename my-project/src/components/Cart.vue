@@ -1,26 +1,65 @@
 <template>
   <div class="cart-container">
     <h2>購物車</h2>
-    <div class="cart-item" v-for="n in 2" :key="n">
-      <button class="delete-button">刪除</button>
-      <div class="item-image">商品圖</div>
-      <div class="item-name">商品名稱</div>
-      <div class="item-quantity">數量</div>
-      <div class="item-price">價格</div>
+    <div class="cart-item" v-for="item in cartItems" :key="item.id">
+      <button class="delete-button" @click="removeItem(item.id)">刪除</button>
+      <div class="item-image">
+        <img :src="item.image" alt="商品圖">
+      </div>
+      <div class="item-name">{{ item.name }}</div>
+      <div class="item-quantity">數量：{{ item.quantity }}</div>
+      <div class="item-price">價格：{{ item.price }} 元</div>
     </div>
 
     <div class="cart-actions">
-      <button class="clear-cart-button">清空購物車</button>
+      <button class="clear-cart-button" @click="clearCart">清空購物車</button>
       <button class="checkout-button" @click="goToCheckout">前往結帳</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+  data() {
+    return {
+      //  初始化購物車內容
+      cartItems: []
+    };
+  },
+  mounted() {
+    // 當頁面載入時，從後端獲取購物車數據
+    axios.get('/api/cart') // 請求後端來獲取用戶的購物車內容
+      .then(response => {
+        this.cartItems = response.data.cartItems; // 假設後端返回一個購物車商品的數組
+    })
+      .catch(error => {
+        console.error('無法加載購物車數據:', error);
+    });
+  },
   methods: {
+    // 發送購物車數據給後端
     goToCheckout() {
-      this.$router.push({ path: '/checkout' });
+      axios.post('/api/checkout', {
+        cartItems: this.cartItems // 傳遞購物車的數據給後端
+      })
+      .then(response => {
+        console.log('結帳成功', response.data);
+        // 跳轉到訂單確認頁面
+        this.$router.push({ path: '/order-confirmation' });
+      })
+      .catch(error => {
+        console.error('結帳失敗', error);
+      });
+    },
+      // 移除商品
+      removeItem(itemId) {
+        this.cartItems = this.cartItems.filter(item => item.id !== itemId);
+    },
+      // 清空購物車
+      clearCart() {
+        this.cartItems = [];
     }
   }
 };

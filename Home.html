@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光潔</title>
+    <link rel="stylesheet" href="css/body.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+    <style>
+        .main-content {
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .slider {
+            width: 70%;
+            margin-right: 20px;
+        }
+        .slick-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            background-color: #fff;
+        }
+        .slick-prev, .slick-next {
+            display: none !important;
+        }
+        .slick-dots {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+        }
+        .slick-dots li button:before {
+            font-size: 25px;
+            color: #fff;
+        }
+        .slick-dots li.slick-active button:before {
+            color: #000;
+        }
+        .ad-container {
+            height: 500px;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .ad-container img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .home-section-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .news-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .news-item img {
+            width: 100%;
+            height: auto;
+        }
+        .news-item p {
+            margin: 10px 0 0;
+            text-align: center;
+        }
+        /* 細清完成圖 */
+        .cleaning-completion {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .cleaning-completion h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .cleaning-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .cleaning-item, .video-item {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .cleaning-item img, .video-item video{
+            flex: 1 1 calc(50% - 20px);
+            width: 100%;
+            border-radius: 8px;
+            height: 400px;
+            object-fit: cover;
+        }
+        .cleaning-item p {
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="GUANGJIE">
+    <div class="orange-bar">
+        預約時間：星期一至五 9:00am-8:30pm · 假日休息
+    </div>
+    <header>
+        <a href="/" class="logo">
+            <img src="image/Logo/光潔.jpg" alt="光潔">
+        </a>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <a v-for="link in links" :href="'#'" :key="link">{{link}}</a>
+        </div>
+        <div class="nav-icons">
+            <div class="search-icon" data-tooltip="搜尋">
+                <img src="image/Icon/Search.png" alt="搜尋">
+            </div>
+            <div class="user-icons" data-tooltip="登入">
+                <img src="image/Icon/login.png" alt="登入">
+            </div>
+            <div class="cart-icon" data-tooltip="購物車">
+                <img src="image/Icon/ShoppingCart.png" alt="購物車">
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-content">
+
+        <div class="slider fade">
+            <div><img src="image/Publicity/Advertise01.jpg" alt="廣告01"></div>
+            <div><img src="image/Publicity/Advertise02.jpg" alt="廣告02"></div>
+            <div><img src="image/Publicity/Advertise03.jpg" alt="廣告03"></div>
+        </div>
+
+        <div class="ad-container">
+            <div><img src="image/Publicity/Advertise04.jpg" alt="廣告04"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <p class="home-section-title">最新消息</p>
+        <div class="news-item">
+            <img src="image/Notify/notify01.jpg" alt="最新消息1">
+            <p>最新消息1的描述</p>
+        </div>
+    </div>
+
+    <div class="section cleaning-completion">
+        <p class="home-section-title">各式專業細清</p>
+        <div class="cleaning-grid">
+            <div class="cleaning-item" v-for="(image, index) in cleaningImages" :key="index">
+                <img :src="image.src" :alt="image.alt">
+                <p>{{ image.caption }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section cleaning-completion">
+        <p class="home-section-title">通通都交給我</p>
+        <div class="cleaning-grid">
+            <div class="video-item">
+                <video controls>
+                    <source src="video/CleaningVideo01.mp4" type="video/mp4">
+                    您的瀏覽器不支援 HTML5 視訊播放。
+                </video>
+            </div>
+            <div class="video-item">
+                <video controls>
+                    <source src="video/CleaningVideo01.mp4" type="video/mp4">
+                    您的瀏覽器不支援 HTML5 視訊播放。
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-column">
+            <h3>關於我們</h3>
+            <p>品牌故事</p>
+            <p>品牌精神</p>
+            <p>團隊成員</p>
+        </div>
+        <div class="footer-column">
+            <h3>顧客服務</h3>
+            <p>運送服務方式</p>
+            <p>退換貨政策</p>
+            <p>條款與細則</p>
+        </div>
+        <div class="footer-column">
+            <h3>聯絡我們</h3>
+            <p>WhatsApp / (+852) 6986-3966</p>
+            <p>電郵 / bravesoulcard@gmail.com</p>
+            <p>門市地址 / 新蒲崗大有街1號勤達中心25樓7室</p>
+            <p>營業時間 / 星期一至日 1-10pm</p>
+        </div>
+    </footer>
+    <div class="orange-bar">
+        預約時間：星期一至五 9:00am-8:30pm · 假日休息
+    </div>
+</div>
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/slick-master/slick/slick.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    let GUANGJIE = new Vue({
+        el: '#GUANGJIE',
+        data: {
+            title: '光潔',
+            links: ['清潔介紹','客人估價調查表','除水垢商品','浴廁拋光商品','地板清潔商品'],
+            cleaningImages: [
+                { src: 'image/Cleaning/Cleaning01.jpg', alt: '清潔完成圖01', caption: '清潔區域01' },
+                { src: 'image/Cleaning/Cleaning02.jpg', alt: '清潔完成圖02', caption: '清潔區域02' },
+                { src: 'image/Cleaning/Cleaning03.jpg', alt: '清潔完成圖03', caption: '清潔區域03' },
+                { src: 'image/Cleaning/Cleaning04.jpg', alt: '清潔完成圖04', caption: '清潔區域04' },
+                { src: 'image/Cleaning/Cleaning05.jpg', alt: '清潔完成圖05', caption: '清潔區域05' },
+                { src: 'image/Cleaning/Cleaning06.jpg', alt: '清潔完成圖06', caption: '清潔區域06' }
+            ]
+        }
+    });
+    $(document).ready(function(){
+        $('.slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true,
+            cssEase: 'linear',
+            autoplay: true,
+            autoplaySpeed: 2000
+        });
+    });
+</script>
+</body>
+</html>

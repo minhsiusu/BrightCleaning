@@ -1,66 +1,55 @@
 <template>
-    <div class="product-introduction">
-      <h2>{{ pageTitle }}</h2>
-      <div class="container">
-        <div class="sidebar">
-          <h3>商品分類</h3>
-          <ul>
-            <li v-for="category in categories" :key="category.name">
-              <router-link :to="category.path">{{ category.name }}</router-link>
-            </li>
-          </ul>
+  <div class="product-introduction">
+    <h2>{{ pageTitle }}</h2>
+    <div class="container">
+      <div class="sidebar">
+        <h3>商品分類</h3>
+        <ul>
+          <li v-for="category in categories" :key="category.name">
+            <router-link :to="category.path">{{ category.name }}</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div class="product-hot-zone">
+          <h3>商品熱銷區（不分種類）</h3>
+          <!-- 這裡可以放置一些熱銷商品的展示內容 -->
         </div>
-        <div class="main-content">
-          <div class="product-hot-zone">
-            <h3>商品熱銷區（不分種類）</h3>
-            <!-- 這裡可以放置一些熱銷商品的展示內容 -->
-          </div>
-          <div class="product-gif">
-            <h3>{{ pageTitle }}專區</h3>
-            <!-- 這裡可以放置一些商品展示的GIF內容 -->
-          </div>
-          <div class="product-items">
-            <div v-for="item in paginatedProducts" :key="item.id" class="product-item">
-              <div class="product-image-container">
-                <img :src="item.image" :alt="item.name" />
-              </div>
-              <div class="product-information">
-                <p>{{ item.name }}</p>
-                <p>數量：{{ item.quantity }}</p>
-                <p class="price">價格：{{ item.price }} 元</p>
-                <button class="add-to-cart-button" @click="goToProductPage(item.id)">
-                  加入購物車
-                </button>
-              </div>
+        <div class="product-gif">
+          <h3>{{ pageTitle }}專區</h3>
+          <!-- 這裡可以放置一些商品展示的GIF內容 -->
+        </div>
+        <div class="product-items">
+          <div v-for="item in paginatedProducts" :key="item.ProductId" class="product-item">
+            <div class="product-image-container">
+              <img :src="item.Picture" :alt="item.ProductName" />
+            </div>
+            <div class="product-information">
+              <p>{{ item.ProductName }}</p>
+              <p>數量：{{ item.Count }}</p>
+              <p class="price">價格：{{ item.Price }} 元</p>
+              <button class="add-to-cart-button" @click="addToCart(item.ProductId)">
+                加入購物車
+              </button>
             </div>
           </div>
-                  <!-- 分頁按鈕 -->
-          <div class="pagination">
-            <button @click="currentPage--" :disabled="currentPage === 1">上一頁</button>
-            <button v-for="page in totalPages" :key="page" :class="{'active': page === currentPage}" @click="currentPage = page">{{ page }}</button>
-            <button @click="currentPage++" :disabled="currentPage === totalPages">下一頁</button>
-          </div>
         </div>
-
+        <div class="pagination">
+          <button @click="currentPage > 1 ? currentPage-- : null" :disabled="currentPage === 1">上一頁</button>
+          <button v-for="page in totalPages" :key="page" :class="{'active': page === currentPage}" @click="currentPage = page">{{ page }}</button>
+          <button @click="currentPage < totalPages ? currentPage++ : null" :disabled="currentPage === totalPages">下一頁</button>
+        </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
+import axios from 'axios';
+
 
 export default {
   name: 'ProductIntroduction',
-  setup() {
-    const router = useRouter();
-
-    const goToProductPage = (productId) => {
-      router.push({ name: 'ProductPurchasing', params: { productId } });
-    };
-    return {
-      goToProductPage,
-    };
-  },
   data() {
     return {
       categories: [
@@ -77,9 +66,7 @@ export default {
   watch: {
     '$route.params.category': 'loadCategoryData',
   },
-  mounted() {
-    this.loadCategoryData();
-  },
+  /*分頁方法*/ 
   computed: {
     paginatedProducts() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
@@ -91,8 +78,35 @@ export default {
     }
   },
   methods: {
-    loadCategoryData() {
-      const category = this.$route.params.category;
+      addToCart(productId) {
+        const product = this.productItems.find(item => item.ProductId === productId);
+        axios.post('/api/cart/add-item', {
+          productId: product.ProductId,     // 後端返回產品 ID
+          name: product.ProductName,        // 後端返回產品名稱
+          quantity: 1,                      // 後端返回預設加入數量為 1
+          price: product.Price              // 後端返回產品價格
+        })
+        .then(() => {
+          alert('商品已成功加入購物車');
+        })
+        .catch(error => {
+          console.error('加入購物車失敗:', error);
+          alert('加入購物車失敗，請稍後再試');
+        });
+      },
+      loadCategoryData() {
+          const category = this.$route.params.category;
+
+          axios.get(`/api/products?category=${category}`)
+            .then(response => {
+              this.productItems = response.data.Product;
+              this.pageTitle = response.data.Type; 
+            })
+            .catch(error => {
+              console.error('加載產品失敗:', error);
+        });
+      }
+      /*
       if (category === 'descaling') {
         this.pageTitle = '除水垢商品';
         this.productItems = [
@@ -118,8 +132,9 @@ export default {
           { id: 9, name: '地板清潔商品3', image: '/image/Product/FloorCleaning/Sample.jpg', quantity: 15, price: 200 },
         ];
       }
-    },
-  },
+        
+    },*/
+  }
 };
 </script>
 

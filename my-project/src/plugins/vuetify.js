@@ -1,6 +1,6 @@
 import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // 引入樣式
-import { aliases, mdi } from 'vuetify/iconsets/mdi'; // 可選，使用 Material Design Icons
+import 'vuetify/styles'; 
+import { aliases, mdi } from 'vuetify/iconsets/mdi'; // Material Design Icons
 
 export default createVuetify({
     icons: {
