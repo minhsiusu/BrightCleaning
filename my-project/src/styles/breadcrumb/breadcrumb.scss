@@ -1,0 +1,48 @@
+@use '../_mixins.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+
+
+.breadcrumb {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+
+    ul {
+        display: flex; // 水平排列
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin-right: 10px;
+        position: relative;
+
+        a {
+            text-decoration: none; // 移除下劃線
+            color: purple; // 文字顏色
+            margin-top: 5px; // 向下偏移
+            display: inline-block;
+            font-size: 14px; // 字體大小
+
+        @media (max-width: 768px) {
+            font-size: 12px; // 小螢幕時調小字體
+        }
+
+        @media (max-width: 480px) {
+            font-size: 10px; // 極小螢幕時進一步調小字體
+        }
+        }
+
+        // 非最後一個項目後的箭頭樣式
+        & + li::before {
+            content: '>'; // 添加箭頭分隔符
+            margin-right: 10px;
+            color: gray;
+            position: relative;
+            top: 3px;
+        }
+    }
+}

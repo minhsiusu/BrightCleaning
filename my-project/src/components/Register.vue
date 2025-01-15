@@ -1,160 +1,137 @@
 <template>
-  <div class="register-container">
-    <h2>會員註冊</h2>
-    <div class="form-group">
-      <label for="emailOrPhone">電子郵件或手機</label>
-      <input type="text" v-model="emailOrPhone" id="emailOrPhone" placeholder="請輸入電子郵件或手機" />
-      <button class="send-code-button" @click="sendVerificationCode">發送驗證碼</button>
+  <div class="page-container">
+    <div class="register-container">
+      <h2 v-if="!isTokenInvalid">會員註冊</h2>
+      <h2 v-else>連結無效或已過期</h2>
+      <div v-if="!isTokenInvalid">
+        <div class="form-group" v-for="(field, key) in fields" :key="key">
+          <label :for="key">{{ field.label }}</label>
+          <input
+            :type="field.type"
+            v-model="form[key]"
+            :id="key"
+            :placeholder="field.placeholder"
+            @input="validateField(key)"
+          />
+          <p class="error-message" v-if="errors[key]">{{ errors[key] }}</p>
+        </div>
+        <button class="submit-button" @click="submitForm">送出</button>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="verificationCode">輸入驗證碼</label>
-      <input type="text" v-model="verificationCode" id="verificationCode" placeholder="請輸入驗證碼" />
-    </div>
-    <div class="form-group">
-      <label for="password">密碼</label>
-      <input type="password" v-model="password" id="password" placeholder="請輸入密碼" />
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">確認密碼</label>
-      <input type="password" v-model="confirmPassword" id="confirmPassword" placeholder="請再次輸入密碼" />
-    </div>
-    <div class="form-group">
-      <label for="firstName">姓名</label>
-      <input type="text" v-model="firstName" id="firstName" placeholder="請輸入姓名" />
-    </div>
-    <div class="form-group">
-      <label for="address">地址</label>
-      <input type="text" v-model="address" id="address" placeholder="請輸入地址" />
-    </div>
-    <button class="submit-button" @click="submitForm">送出</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../service/axios';
 
 export default {
   name: "Register",
   data() {
     return {
-      emailOrPhone: '', // 用戶輸入電子郵件或手機
-      verificationCode: '', // 用戶輸入驗證碼
-      password: '',         // 用戶輸入密碼
-      confirmPassword: '',  // 用戶輸入確認密碼
-      firstName: '',        // 用戶輸入姓名
-      address: ''           // 用戶輸入住址
+      form: {
+        account: '',
+        password: '',
+        name: '',
+        cellPhone: '',
+        address: ''
+      },
+      errors: {},
+      isTokenInvalid: false, // 預設為有效
+      fields: {
+        account: {
+          label: '會員名稱',
+          type: 'text',
+          placeholder: '請輸入會員名稱',
+          rules: value => (value && value.length >= 3 ? '' : '帳號需至少 3 個字元')
+        },
+        password: {
+          label: '密碼',
+          type: 'password',
+          placeholder: '請輸入密碼',
+          rules: value => (value && value.length >= 8 ? '' : '密碼需至少 8 個字元')
+        },
+        name: {
+          label: '姓名',
+          type: 'text',
+          placeholder: '請輸入姓名',
+          rules: value => (value ? '' : '姓名不能為空')
+        },
+        cellPhone: {
+          label: '手機',
+          type: 'text',
+          placeholder: '請輸入手機',
+          rules: value => (/^09\d{8}$/.test(value) ? '' : '手機格式不正確')
+        },
+        address: {
+          label: '地址',
+          type: 'text',
+          placeholder: '請輸入地址',
+          rules: value => (value ? '' : '地址不能為空')
+        }
+      }
     };
   },
+  async created() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    const email = urlParams.get("email");
+    if (!token || !email ) {
+      this.isTokenInvalid = true;
+      this.$router.push("/register-comfirm");
+      return;
+    }
+
+    await this.verifyToken(token, email);
+  },
   methods: {
-    sendVerificationCode() {
-      // 發送驗證碼的請求，將 emailOrPhone 傳遞給後端
-      axios.post('/api/send-verification-code', {
-        emailOrPhone: this.emailOrPhone
-      })
-      .then(response => {
-        console.log('驗證碼發送成功:', response.data);
-      })
-      .catch(error => {
-        console.error('發送驗證碼失敗:', error);
-        alert('驗證碼發送失敗，請檢查電子郵件或手機號碼');
-      });
+    async verifyToken(registerToken, email) {
+      try {
+        // 將 token 傳遞給後端進行驗證
+        await  axios.get(`/user/register/confirm?token=${registerToken}`); 
+        console.log("Token 驗證成功");
+        this.isTokenInvalid = false;
+        this.form.email = email;
+      } catch (error) {
+        console.error("Token 驗證失敗:", error.response ? error.response.data : error);
+        this.isTokenInvalid = true;
+      } finally {
+        this.loading = false;
+      }
     },
-    submitForm() {
-      // 前端確認密碼和檢查輸入是否為空
-      if (!this.emailOrPhone || !this.verificationCode || !this.password || !this.firstName || !this.address) {
-        alert('所有欄位都必須填寫');
+    validateField(key) {
+      const rule = this.fields[key].rules;
+      this.errors[key] = rule ? rule(this.form[key]) : '';
+    },
+    // 提交註冊表單
+    async submitForm() {
+      Object.keys(this.fields).forEach(this.validateField);
+
+      // 檢查表單是否有錯誤
+      if (Object.values(this.errors).some(error => error)) {
+        alert("請修正所有欄位錯誤後再提交");
         return;
       }
+      this.loading = true; // 設置為加載狀態
 
-      // 發送資料給後端，不再傳送 confirmPassword
-      axios.post('/api/register', {
-        emailOrPhone: this.emailOrPhone,
-        verificationCode: this.verificationCode,
-        password: this.password,
-        firstName: this.firstName,
-        address: this.address
-      })
-      .then(response => {
-        console.log('註冊成功:', response.data);
-        alert('註冊成功');
-      })
-      .catch(error => {
-        console.error('註冊失敗:', error);
-        alert('註冊失敗，請檢查表單資料');
-      });
-    }
+      try {
+        // 提交表單資料和 token 進行註冊
+        await axios.post('/user/register/complete', {
+          email: this.form.email,
+          ...this.form, // 表單資料
+        });
+        alert('註冊成功！');
+        // 註冊成功後跳轉到登入頁
+        this.$router.push('/login');
+      } catch (error) {
+        console.error("註冊失敗:", error);
+        alert("註冊失敗，請檢查表單資料");
+      } finally {
+        // 無論成功與否，解除加載狀態
+        this.loading = false;
+      }
+    },
   }
 };
 </script>
 
-<style scoped>
-.register-container {
-  max-width: 400px;
-  margin: 50px auto;
-  margin-top: 130px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-}
 
-.register-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.form-group label {
-  flex: 1;
-  font-weight: bold;
-  font-size: 14px; /* 字體變小 */
-}
-
-.form-group input {
-  flex: 2;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-group input:focus {
-  border-color: #ff6600; /* 聚焦時邊框顯示橘色 */
-  outline: none;
-}
-
-.send-code-button {
-  flex: 1;
-  margin-left: 10px;
-  padding: 10px;
-  background-color: #494949;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.send-code-button:hover {
-  background-color: #888a88;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #494949;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.submit-button:hover {
-  background-color: #888a88;
-}
-</style>

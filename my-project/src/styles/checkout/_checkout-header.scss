@@ -1,0 +1,118 @@
+@use '../_mixins.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+
+.checkout-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+
+  .logo {
+    margin-top: 30px;
+    margin-left: 500px; // 向右移動
+    transform: scale(2.0);
+
+    img {
+      height: 50px;
+    }
+  }
+
+  .cart-icon {
+    margin-top: 30px;
+    margin-right: 500px; // 向左移動
+
+    img {
+      height: 40px;
+      cursor: pointer;
+    }
+  }
+  @media (max-width: 820px) {
+    align-items: center;
+
+    .logo {
+      margin-left: 100px;
+      margin-bottom: 10px;
+      transform: scale(1.8);
+
+      img {
+        height: 40px;
+      }
+    }
+
+    .cart-icon {
+      margin-right: 0;
+      margin-bottom: 10px;
+
+      img {
+        height: 35px;
+      }
+    }
+  }
+  // 響應式設計
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    .logo {
+      margin-left: 0;
+      margin-bottom: 10px;
+      transform: scale(1.6);
+
+      img {
+        height: 40px;
+      }
+    }
+
+    .cart-icon {
+      margin-right: 0;
+      margin-bottom: 10px;
+
+      img {
+        height: 35px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+
+    .logo {
+      transform: scale(1.6);
+
+      img {
+        height: 30px;
+      }
+    }
+
+    .cart-icon {
+      img {
+        height: 25px;
+      }
+    }
+  }
+}
+
+.contact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .account-name {
+    margin-left: 10px;
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 14px; // 縮小字體
+
+    // 響應式設計
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
+  }
+}

@@ -1,0 +1,158 @@
+@use '../_mixins.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+
+.right-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 50%;
+  padding: 20px;
+
+  .account-name {
+    margin-left: 10px;
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 14px; // 縮小字體
+
+    // 響應式設計
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
+  }
+
+  .right-item-data {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+
+    .order-summary {
+      margin-top: 20px;
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        height: 150px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.05);
+
+        .product-image {
+          width: 100px;
+          height: 100px;
+          margin-right: 10px;
+
+          // 響應式設計
+          @media (max-width: 768px) {
+            width: 80px;
+            height: 80px;
+          }
+
+          @media (max-width: 480px) {
+            width: 60px;
+            height: 60px;
+          }
+        }
+
+        .product-info {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+
+            @media (max-width: 768px) {
+              font-size: 14px;
+            }
+
+            @media (max-width: 480px) {
+              font-size: 12px;
+            }
+          }
+
+          p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+
+            @media (max-width: 768px) {
+              font-size: 12px;
+            }
+
+            @media (max-width: 480px) {
+              font-size: 10px;
+            }
+          }
+        }
+
+        span:first-child {
+          font-weight: bold;
+          color: #555;
+
+          @media (max-width: 768px) {
+            font-size: 12px;
+          }
+
+          @media (max-width: 480px) {
+            font-size: 10px;
+          }
+        }
+
+        span:last-child {
+          font-weight: bold;
+          color: #333;
+          font-size: 16px;
+
+          @media (max-width: 768px) {
+            font-size: 14px;
+          }
+
+          @media (max-width: 480px) {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  // 響應式設計
+  @media (max-width: 768px) {
+    flex-direction: column; // 左右改為上下排列
+    width: 100%;
+    padding: 15px;
+
+    .right-item-data {
+      max-width: 100%; // 占滿可用空間
+      padding: 10px;
+    }
+
+    .summary-item {
+      flex-direction: column; // 改為垂直排列
+      align-items: flex-start;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+
+    .right-item-data {
+      padding: 5px;
+    }
+
+    .summary-item {
+      padding: 8px;
+    }
+  }
+}

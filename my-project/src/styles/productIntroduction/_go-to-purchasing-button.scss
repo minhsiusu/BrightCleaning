@@ -1,0 +1,32 @@
+// src/styles/productIntroduction/_add-to-cart.scss
+@use '../_variables.scss' as *;
+@use '../_mixins.scss' as *;
+@use '../_colors.scss' as *;
+
+/* 進入購物車按鈕樣式 */
+.go-to-purchasing-button {
+padding: 10px 20px;
+width:150px;
+background-color: $color-highlight;
+color: $color-white;
+border: none;
+cursor: pointer;
+font-size: $font-size-button;
+margin-top: 10px;
+margin-bottom: 40px;
+transition: background-color 0.3s ease;
+    &:hover{
+        background-color: #e64a19;
+    }
+    @media (max-width: 768px) {
+        width:100px;
+        font-size: 16px;
+    }
+    @media (max-width: 480px) {
+        adding: 10px 10px;
+        width:90px;
+        font-size: 12px;
+    }
+
+}
+

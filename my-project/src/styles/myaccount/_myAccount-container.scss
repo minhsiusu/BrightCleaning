@@ -1,0 +1,19 @@
+@use '../_mixins.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+
+.myAccount-container {
+    display: flex;
+    width: 90%;
+    height: 80vh;
+    margin-top: 80px;
+    max-width: 1000px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    @media (max-width: 768px) {
+        flex-direction: column;
+
+    }
+}

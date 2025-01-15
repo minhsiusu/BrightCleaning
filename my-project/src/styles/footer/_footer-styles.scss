@@ -1,0 +1,82 @@
+@use "../_colors.scss" as *;
+@use '../_variables.scss' as *;
+
+footer {
+    width: 100%;
+    background-color: $background-color;
+    color: $text-color;
+    box-shadow: 5px 5px 10px $shadow-color;
+
+.footer-wrapper {
+    display: flex;
+    justify-content: center; // 讓內容水平置中
+    align-items: center; // 讓內容垂直置中
+
+
+    @media (max-width: 768px) {
+        flex-direction: column; // 小螢幕下改為垂直排列
+        text-align: center; // 讓文字居中
+    }
+}
+
+.footer-logo {
+    transform: scale(1.2);
+    transform-origin: center;
+    margin-right: 10px;
+    margin-top: 20px;
+    img {
+        height: 80px;
+
+        @media (max-width: 768px) {
+            height: 50px; // 在小螢幕縮小 logo
+        }
+    }
+}
+
+.footer-content {
+    text-align: left;
+
+    @media (max-width: 768px) {
+        text-align: center; // 小螢幕文字居中
+    }
+}
+
+.footer-column {
+padding: 10px;
+color: $text-color;
+
+    h3 {
+        margin-bottom: 8px;
+        font-size: 16px;
+
+        @media (max-width: 768px) {
+            font-size: 14px; // 小螢幕字體縮小
+        }
+    }
+
+    p {
+        margin: 5px 0;
+        font-size: 12px;
+        color: $text-color;
+        white-space: nowrap;
+
+        @media (max-width: 768px) {
+            font-size: 10px; // 小螢幕字體更小
+            white-space: normal; // 允許換行
+        }
+    }
+}
+
+    .orange-bar {
+    font-size: 14px;
+    background-color: $color-highlight;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: 12px; // 小螢幕字體縮小
+            padding: 8px; // 減少間距
+        }
+    }
+}

@@ -1,0 +1,49 @@
+// src/styles/productIntroduction/_category-bar.scss
+@use '../_variables.scss' as *;
+@use '../_mixins.scss' as *;
+@use '../_colors.scss' as *;
+
+.category-menu {
+    @include flex-center;
+    margin-top: $spacing-medium;
+    background-color: $color-white;
+    border-bottom: 1px solid $color-border;
+
+    ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin: 0 $spacing-large;
+        a {
+            text-decoration: none;
+            color: $color-black;
+            font-size: $font-size-content;
+            padding: 10px 0;
+            display: block;
+            position: relative;
+            @media (max-width: 768px) {
+                font-size: 18px;
+            }
+            @media (max-width: 480px) {
+                font-size: 16px;
+            }
+                &:hover,
+                &.router-link-active {
+                    color: $color-highlight; // 使用全域顏色 #ff5722
+            }
+                &.router-link-active::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: $color-highlight;
+            }
+        }
+    }
+}

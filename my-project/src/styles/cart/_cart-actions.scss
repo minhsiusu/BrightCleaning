@@ -1,0 +1,51 @@
+// src/styles/cart/_cart-actions.scss
+@use '../_mixins.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+        .clear-cart-button,
+        .checkout-button {
+            padding: 10px 10px;
+            width:120px;
+            background-color: $color-primary;
+            color: $color-white;
+            border: none;
+            border-radius: $border-radius-small;
+            cursor: pointer;
+
+                &:hover {
+                    background-color: $color-primary-hover;
+                }
+        }
+        .clear-cart-button {
+            background-color: $color-highlight;
+                &:hover{
+                    background-color: #e64a19;
+                }
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            .clear-cart-button,
+            .checkout-button {
+                width: 100%;
+                padding: 10px 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .clear-cart-button,
+            .checkout-button {
+                font-size: 12px;
+                padding: 10px 10px;
+            }
+        }
+}

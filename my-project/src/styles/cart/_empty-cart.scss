@@ -1,0 +1,10 @@
+// src/styles/cart/_empty-cart.scss
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+/* 空購物車樣式 */
+.empty-cart-message {
+    text-align: center;
+    font-size: $font-size-small;
+    color: $color-dark-gray;
+    padding: $padding-container 0;
+}

@@ -1,6 +1,20 @@
 <template>
- <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <div class="HomePage">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<div class="HomePage">
+
+    <!-- 面試專案跳出提示 -->
+    <div v-if="showPopup" class="popup-overlay" @click="closePopup">
+      <div class="popup" @click.stop>
+        <h1>光潔購物網站 - 面試專案</h1>
+        <p>這是我為前端面試設計的網站，展示了我在 Vue.js、後端 API 整合、CSS 設計等方面的技能。</p>
+        <ul>
+          <li>主要功能 :商品搜尋、購物車、會員系統等。</li>
+          <li>使用技術 :Vue 3、Axios、Node.js、SCSS。</li>
+          <li>專案目標 :模擬一個電商平台，體現完整的前端開發流程。</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- Header section with image -->
     <div class="header-banner">
       <img src="/image/AboutUs/work/AboutUs05.jpg" alt="關於光潔">
@@ -24,7 +38,7 @@
 
         <!-- 右邊詳細介紹 -->
         <div class="intro-right">
-          <P1>Trusted professionals, ensuring your home is pristine and refreshed.</P1>
+          <p>Trusted professionals, ensuring your home is pristine and refreshed.</p>
           <p>我們致力於打造最受客戶青睞的清潔服務品牌，以高效和專業的清潔技術，為每一位客戶提供全方位的裝潢後清潔服務，確保您的新居乾淨整潔。無論是去除建築殘留物還是深度清潔，我們的團隊都擁有豐富的經驗與專業設備，能滿足您的清潔需求。</p>
         </div>
 
@@ -59,9 +73,9 @@
           <li>玻璃鍍膜 / Glass coating</li>
           <li>沙發清潔 / Sofa cleaning</li>
         </ul>
-       </div>
+      </div>
 
-       <!-- 右側服務列表 -->
+      <!-- 右側服務列表 -->
       <div class="process-title">
         <h2>Work Process</h2>
       </div>
@@ -73,7 +87,7 @@
           <li>STEP4.  / 指定到府清潔 </li>
           <li>STEP5.  / 完工驗收付款</li>
         </ul>
-       </div>
+      </div>
     </div>
   
 
@@ -101,21 +115,17 @@
         </router-link>
       </div>
     </div>
-
 </div>
 </template>
 
 <script>
 export default {
+  emits: ['userUpdated'],
   name: 'HomePage',
   data() {
     return {
-      isOverlayVisible: false, // 控制是否顯示
-      areas: [
-        { name: '台南', image: '/image/AboutUs/areas/Tainan.png' },
-        { name: '高雄', image: '/image/AboutUs/areas/Kaohsiung.png' },
-        { name: '屏東', image: '/image/AboutUs/areas/Pingtung.png' }
-      ],
+      showPopup: true, // 控制彈跳訊息是否顯示
+      isOverlayVisible: false,  // 控制是否顯示動畫
       images: [
         { src: "/image/CleaningCase/Cleaning01.jpg", alt: "圖片1" },
         { src: "/image/CleaningCase/Cleaning02.jpg", alt: "圖片2" },
@@ -152,7 +162,17 @@ export default {
           image: '/image/Icon/HomePage/Process/hand-coin-outline.png',
         }
       ],
+      areas: [
+        { name: '台南', image: '/image/AboutUs/areas/Tainan.png' },
+        { name: '高雄', image: '/image/AboutUs/areas/Kaohsiung.png' },
+        { name: '屏東', image: '/image/AboutUs/areas/Pingtung.png' }
+      ],
     };
+  },
+  methods: {
+    closePopup() {
+      this.showPopup = false; // 關閉彈跳提示框
+    },
   },
   mounted() {
     // 動畫效果延遲 1 秒後觸發
@@ -164,405 +184,9 @@ export default {
 </script>
 
 <style scoped>
-/* 定義動畫：由暗變亮 */
-@keyframes fadeIn {
-  0% {
-    background-color: rgba(0, 0, 0, 1); /* 完全不透明的黑色 */
-  }
-  100% {
-    background-color: rgba(0, 0, 0, 0); /* 完全透明 */
-  }
-}
+
 .HomePage {
   width: 100%;
 }
 
-.header-banner {
-  position: relative;
-  width: 100%;
-  height: 800px;
-  overflow: hidden;
-}
-
-.header-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/*overlay stytle*/
-.text-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  padding-top: 10%;
-  padding-left: 100px;
-  animation: fadeIn 3s forwards; /* 設置動畫效果，持續 5 秒 */
-}
-
-.text-overlay h1 {
-  position: relative;
-  font-family: 'MantouSans-Regular', sans-serif;
-  font-weight: 25; /* 粗體 */
-  font-size: 70px; /* 字體大小 */
-  color: white; /* 白色字體 */
-  letter-spacing: 2px; /* 字母間距 */
-  opacity: 0; /* 起始時不可見 */
-  transform: translateY(100px); /* 初始位置在下方 */
-  transition: transform 2s ease, opacity 1.5s ease; /* 過渡效果 */
-}
-
-.text-overlay h2 {
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 40px;
-  font-weight: bold;
-  white-space: nowrap;
-  color: white;
-  opacity: 0; /* 起始時不可見 */
-  transform: translateY(100px); /* 初始位置在下方 */
-  transition: transform 2s ease, opacity 1.5s ease; /* 過渡效果 */
-}
-
-
-.text-overlay h3 {
-  position: relative;
-  font-size: 24px;
-  font-weight: bold;
-  white-space: normal; /* 允許文字換行 */
-  color: white;
-  max-width: 40%; /* 控制文字寬度 */
-  line-height: 1.5;
-  padding-top: 120px;
-  opacity: 0; /* 起始時不可見 */
-  transform: translateY(100px); /* 初始位置在下方 */
-  transition: transform 2s ease, opacity 1.5s ease; /* 過渡效果 */
-}
-
-.text-overlay.show h3, 
-.text-overlay.show h2, 
-.text-overlay.show h1 {
-  transform: translateY(0); /* 移動到原本位置 */
-  opacity: 1; /* 變得可見 */
-
-}
-/* Introduction Section */
-.introduction {
-  padding: 50px 10%;
-  font-family: Arial, sans-serif;
-  margin: 100px;
-}
-
-.intro-container {
-  display: flex;
-  align-items: flex-start; /* 讓內容在容器內靠上對齊 */
-  justify-content: flex-start; /* 讓內容在容器內靠左對齊 */
-  gap:10px;
-}
-
-.intro-left {
-  flex: 1;
-  margin-top: -20px;
-  justify-content: center;
-  padding-right: 25px;
-}
-
-.intro-right {
-  flex: 1;
-  padding-left: 25px;
-}
-
-.intro-left h1 {
-  font-weight: 25; /* 粗體 */
-  font-size: 70px; /* 字體大小 */
-
-  color: #333;
-  font-family: 'MantouSans-Regular', sans-serif;
-}
-
-.intro-left p {
-  font-size: 24px;
-  font-weight: bold;
-  color: #414141;
-}
-
-.intro-right p {
-  font-size: 24px;
-  color: #555;
-  line-height: 1.6;
-}
-.intro-right p1 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000000;
-  line-height: 1.6;
-}
-/* Process section styling */
-.process-section {
-  background-color: #f8f8f2; 
-  padding: 10px;
-  text-align: center;
-  position: relative;
-  width: auto;
-  text-align: center;
-  color: #333;
- 
-}
-
-.process-section-title {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 100px;
-}
-
-.process-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0;
-  position: relative;
- 
-}
-
-.process-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 220px;
-  height: 300px;
-  text-align: left; 
-  position: relative;
-  margin-bottom: 70px;
-}
-
-.process-icon img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.process-content h3 {
-  font-size: 22px;
-  color: black;
-  white-space: nowrap;
-}
-
-.process-content p {
-  font-size: 18px;
-  color: #000;
-  text-align: left;
-}
-.link-text {
-  color: #38393a;
-  text-decoration: underline;
-  font-size: 16px;
-  font-weight: 600;
-  transition: color 0.3s ease;
-
-}
-
-.link-text:hover {
-  color: #000000;
-  text-decoration: none;
-  font-weight: bold;
-}
-/* Process section styling */
-
-/* Img Section */
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5欄 */
-  grid-auto-rows: 300px; /* 每個項目的最小高度 */
-  gap: 10px; /* 圖片間距 */
-  padding: 20px;
-}
-
-.grid-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px; /* 圓角邊框 */
-}
-
-.grid-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-}
-
-
-/* 特定項目的不同大小 */
-.grid-item:nth-child(1) {
-  grid-column: span 2; 
-  grid-row: span 2; 
-}
-
-.grid-item:nth-child(3) {
-  grid-column: span 2;
-  grid-row: span 1;
-}
-
-.grid-item:nth-child(4) {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-/* services-process-section */
-.services-process-section {
-  display: flex;
-  justify-content: space-between;
-  padding: 150px 50px;
-  background-color: #1a1a1a; /* 背景色 */
-}
-
-
-.service-section {
-  display: flex;
-  justify-content:center; /*內容在容器內左右對齊 */
-  align-items: center; 
-  background-color: #141414;
-  
-}
-.service-content ,.process-content{
-  flex: 3; /* 右側內容占據容器的 3 份 */
-  color: #ffffff;
-}
-.service-title ,.process-title {
-  flex: 1; /* 左側標題占據容器的 1 份 */
-  color: #ffffff;
-  font-size: 36px;
-  font-weight: bold;
-  margin-left:200px
-}
-.service-content ul ,.process-content ul{
-  list-style: none;
-}
-
-.service-content li ,.process-content li{
-  font-size: 20px;
-  padding: 10px 0;
-  color: #ffffff;
-  font-weight: normal;
-}
-
-
-
-
-/* service-areas-section */
-.service-areas  {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #333;
-  padding: 50px;
-}
-.service-areas-intro h1 {
-  font-size: 48px;
-  font-weight: bold;
-}
-
-.service-areas-intro p {
-  text-align: left;
-  font-size: 20px;
-  line-height: 1.6;
-  max-width: 1100px;
-  margin: 60px auto;
-}
-.area-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.area-card {
-
-  padding: 50px;
-  text-align: center;
-
-  border-radius: 8px;
-  width: 300px;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.area-card:hover {
-  background-color: #eaeaea;
-  transform: scale(1.05); /* 輕微放大 */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 添加陰影 */
-}
-
-.area-card img {
-  width: 100%;
-  height: 400px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.area-card:hover img {
-  transform: scale(1.1); /* 圖片放大 */
-}
-
-.area-card h3 {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-/* contact-section */
-.contact-section {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  overflow: hidden;
-}
-
-.contact-section img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.contact-overlay {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 40%; /* 右側遮罩寬度 */
-  background: rgba(0, 0, 0, 0.6); /* 半透明遮罩 */
-  color: white;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.contact-overlay h2 {
-  font-family: 'Poppins', sans-serif; /* 使用現代無襯線字體 */
-  font-weight: 900; /* 粗體 */
-  font-size: 70px; /* 字體大小 */
-  color: white; /* 白色字體 */
-  letter-spacing: 2px; /* 字母間距 */
-  margin-bottom: 20px;
-}
-
-.contact-overlay p {
-  font-size: 18px;
-  margin-bottom: 30px;
-}
-
-.contact-overlay button {
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.contact-overlay button:hover {
-  background-color: white;
-  color: black;
-}
 </style>

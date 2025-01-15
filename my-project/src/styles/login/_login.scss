@@ -1,0 +1,99 @@
+// src/styles/home/_login.scss
+@use '../_colors.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_mixins.scss'as *;
+.login-container {
+    width: 400px; /* 增加寬度，變成長方形 */
+    margin: 50px auto; /* 水平居中，減小上下外邊距 */
+    padding: 30px; /* 增加內邊距 */
+    padding-bottom: 20px;
+    margin-top: 200px;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-medium;
+    background-color: $color-white;
+    @media (max-width: 768px) {
+        max-width: 90%;
+        margin: 40px auto;
+        padding: $padding-small;
+        margin-top: 150px;
+    }
+    
+    @media (max-width: 480px) {
+        width: 80%;
+        margin: 20px auto;
+        margin-top: 100px;
+        padding: $padding-extra-small
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: $margin-input;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $margin-input;
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            @media (max-width: 768px) {
+                font-size: 12px;
+            }
+        
+            @media (max-width: 480px) {
+                font-size: 10px;
+            }
+        }
+        input {
+            width: 100%;
+            padding: $padding-input;
+            border: 1px solid $color-border;
+            border-radius: $border-radius-small;
+            box-sizing: border-box;
+                &:focus {
+                    border-color: $color-highlight; // 聚焦時邊框顏色
+                    outline: none;
+                }
+        }
+    }
+    .login-button {
+        width: 100%;
+        padding: $padding-input;
+        background-color: $color-primary;
+        color: $color-white;
+        border: none;
+        border-radius: $border-radius-small;
+        cursor: pointer;
+        font-size: $font-size-button;
+        margin-top: $margin-input;
+            &:hover {
+                background-color: $color-primary-hover;
+                @include transition(background-color);
+            }
+    }
+    .links {
+        display: flex;
+        justify-content: space-between;
+        margin-top: $margin-input;
+        .forgot-password-link {
+            color: $color-link-secondary;
+            margin-right: auto;
+                &:hover {
+                    text-decoration: underline;
+                }
+        }
+        .register-link {
+            color: $color-link-primary;
+            margin-left: auto;
+                &:hover {
+                    text-decoration: underline;
+                }
+        }
+    }
+    
+}
+
+
+
+
+

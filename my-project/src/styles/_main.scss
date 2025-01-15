@@ -1,0 +1,56 @@
+// src/styles/_main.scss
+
+@use './footer/_footer-styles.scss';
+
+@use './header/_header-styles.scss';
+@use './header/_nav-menu-styles.scss';
+@use './header/_dropdown-styles.scss';
+@use './header/_badge-styles.scss';
+@use './header/_search-bar-styles.scss';
+
+@use './login/_login.scss';
+@use './reset/_reset-container.scss';
+@use './register/_register.scss';
+@use './register/_emailcomfirm.scss';
+
+@use './forgotpassword/_forgot-password-container.scss';
+
+
+@use './home/_header-banner.scss';
+@use './home/_introduction.scss';
+@use './home/_process-section.scss';
+@use './home/_services-process-section.scss';
+@use './home/_service-areas.scss';
+@use './home/_contact-section.scss';
+@use './home/_interview-intro';
+
+@use './portfolio/_portfolio-main-content.scss';
+@use './portfolio/_portfolio.scss';
+@use './portfolio/_testimonials.scss';
+
+@use './productIntroduction/_ad-swiper.scss';
+@use './productIntroduction/_category-menu.scss';
+@use './productIntroduction/_product-introduction.scss';
+@use './productIntroduction/_go-to-purchasing-button.scss';
+@use './productIntroduction/_pagination.scss';
+
+@use './productPurchasing/_product-purchasing_popup.scss';
+@use './productPurchasing/_product-purchasing.scss';
+
+@use './cart/_popup.scss';
+@use './cart/_empty-cart.scss';
+@use './cart/_cart-content.scss';
+@use './cart/_cart-actions.scss';
+
+@use './myaccount/_myAccount-container.scss';
+@use './myaccount/_myAccount-left.scss';
+@use './myaccount/_myAccount-right.scss';
+
+@use './checkout/_checkout-header.scss';
+@use './checkout/_checkout-left.scss';
+@use './checkout/_checkout-right.scss';
+@use './checkout/_checkout-page.scss';
+@use './checkout/_success-message.scss';
+
+
+@use './breadcrumb/breadcrumb.scss';

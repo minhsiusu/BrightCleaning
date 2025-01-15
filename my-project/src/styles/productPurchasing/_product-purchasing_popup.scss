@@ -1,0 +1,91 @@
+// src/styles/productPurchasing/_product-purchasing_popup.scss
+@use '../_mixins.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_colors.scss' as *;
+
+/* 加入購物車成功通知彈窗樣式 */
+.success-popup {
+    @include popup;
+    width: 400px;
+    height: 200px;
+    @media (max-width: 768px) {
+        width: 300px;
+        height: 150px;
+    }
+    @media (max-width: 480px) {
+        width: 300px;
+        height: 150px;
+    }
+    img{
+        object-fit: cover;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+
+        @media (max-width: 768px) {
+            width: 80px;
+            height: 80px;
+        }
+        @media (max-width: 480px) {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+  /* 加入購物車失敗通知彈窗樣式 */
+.fail-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 200px;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 16px;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    @media (max-width: 768px) {
+        width: 300px;
+        height: 150px;
+    }
+    @media (max-width: 480px) {
+        width: 300px;
+        height: 150px;
+    }
+    button {
+        width:100px;
+        margin-top: $spacing-medium;
+        padding: $padding-input $spacing-medium;
+        background-color: $color-highlight;
+        color: $color-white;
+        border: none;
+        border-radius: $border-radius-small;
+        cursor: pointer;
+        font-size: $font-size-base;
+        @media (max-width: 768px) {
+            width:80px;
+            font-size: 14px;
+        }
+        @media (max-width: 480px) {
+            width:80px;
+            font-size: 14px;
+        }
+        &:hover {
+            background-color: #bbb;
+        }
+    }
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}

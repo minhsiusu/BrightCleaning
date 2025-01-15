@@ -44,11 +44,11 @@ export default {
       },
       links: [
         { text: '回首頁| ', path: '/' },
-        { text: '關於我們| ', path: '/AboutUs' },
+        { text: '我們的成果| ', path: '/Portfolio' },
         { text: '客人估價調查表| ', path: '/Questionnaire' },
         { text: '除水垢商品| ', path: '/product-introduction/descaling' },
         { text: '浴廁拋光商品| ', path:'/product-introduction/polishing' },
-        { text: '地板清潔商品| ', path: '/product-introduction/floor-cleaning' },
+        { text: '地板清潔商品| ', path: '/product-introduction/floorcleaning' },
       ],
       services: ['居家清潔', '裝潢細清', '玻璃鍍膜', '沙發清潔'],
     };
@@ -56,61 +56,3 @@ export default {
 };
 </script>
 
-<style >
-footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  background-color: white;
-  color: #000;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  margin-top: auto;
-}
-
-.footer-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center; /* 兩個區塊整體置中 */
-  align-items: center; /* 垂直居中對齊 */
-}
-
-.footer-logo {
-  transform: scale(1.2); /* 將 logo 放大 */
-  transform-origin: center;
-  margin-right: 10px;
-}
-
-.footer-logo img {
-  height: 80px;
-}
-
-.footer-content {
-  text-align: left;
-}
-
-.footer-column {
-  padding: 10px;
-  color: #000;
-}
-
-.footer-column h3 {
-  margin-bottom: 8px;
-  font-size: 16px;
-  color: #000;
-}
-
-.footer-column p {
-  margin: 5px 0;
-  font-size: 12px;
-  color: #000;
-  white-space: nowrap;
-}
-.orange-bar {
-  font-size: 14px;
-  background-color: #ff6600;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-</style>

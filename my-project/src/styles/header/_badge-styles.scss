@@ -1,0 +1,23 @@
+// src/styles/header/_badge-styles.scss
+@use '../_colors.scss' as *;
+@use '../_mixins.scss' as *;
+.cart-badge {
+@include flex-center;
+    background-color: #ff6a3c;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 44px;
+    right: 20px;
+    @media (max-width: 768px) {
+        width: 16px; // 小螢幕縮小徽章大小
+        height: 16px;
+        font-size: 10px; // 縮小字體大小
+        top: 12px; // 調整記數徽章的位置
+        right: -1px;
+    }
+}

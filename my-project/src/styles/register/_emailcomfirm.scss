@@ -1,0 +1,105 @@
+// src/styles/reset/_emailcomfirm.scss
+@use '../_colors.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_mixins.scss'as *;
+.emailcomfirm-container {
+    position: relative; /* 確保返回按鈕能夠絕對定位 */
+    width: 400px;
+    margin: 200px auto;
+    padding: $padding-standard;
+    border-radius: $border-radius-medium;
+    background-color: $color-white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    @media (max-width: 768px) {
+        width: 90%;
+        margin: 150px auto;
+        padding: $padding-small;
+    }
+    
+    @media (max-width: 480px) {
+        width: 80%;
+        margin: 100px auto;
+        padding: $padding-extra-small;
+    }
+    h2 {
+        font-size: $font-size-content;
+        margin-bottom: $spacing-large;
+        color:  #ff5722;
+        font-weight: 500;
+    }
+    .back-button {
+        position: absolute;
+        top: 30px;
+        left: 16px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        max-width: 40px;
+
+        svg {
+            width: 24px;
+            height: 24px;
+            fill: $color-link-secondary;
+        }
+
+        &:hover {
+            background-color: transparent; /* 無顏色變化 */
+        }
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            margin-bottom: 40px;
+    
+            &:focus {
+                border-color: #ff5722;
+                outline: none;
+            }
+        }
+        button {
+            width: 100%;
+            padding: $spacing-medium;
+            background-color: $color-highlight;
+            color:  $color-white;
+            border: none;
+            border-radius: $border-radius-small;
+            font-size: $font-size-button;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+    
+            &:hover {
+                background-color: #e25b01
+            }
+        }
+    }
+    .ok-button {
+        width: 100%;
+        padding: $spacing-medium;
+        background-color: $color-highlight;
+        color: $color-white;
+        border: none;
+        border-radius: $border-radius-small;
+        font-size: $font-size-button;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: $spacing-medium; /* 添加與上方內容的間距 */
+    
+        &:hover {
+          background-color: #e25b01; /* 確保 hover 效果一致 */
+        }
+    }
+}
+
+

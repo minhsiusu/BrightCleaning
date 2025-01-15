@@ -1,0 +1,118 @@
+// src/styles/home/_introduction.scss
+@use '../_colors.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_mixins.scss'as *;
+/* Introduction Section */
+.introduction {
+    padding: $padding-standard;
+    font-family: Arial, sans-serif;
+    margin: 80px;
+    @media (max-width: 820px) {
+        margin: 50px;
+        padding: $padding-small;
+    }
+    
+    @media (max-width: 768px) {
+        margin: 50px;
+        padding: $padding-small;
+    }
+    
+    @media (max-width: 480px) {
+        margin: 20px;
+        padding: $padding-small;
+    }
+
+    .intro-container {
+        display: flex;
+        align-items: flex-start; /* 讓內容在容器內靠上對齊 */
+        justify-content: flex-start; /* 讓內容在容器內靠左對齊 */
+        @media (max-width: 820px) {
+            flex-direction: column;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    .intro-left {
+        flex: 1;
+        margin-top: -25px;
+        justify-content: center;
+        @media (max-width: 820px) {
+            padding-right: 0;
+            margin-top: 0;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            padding-right: 0;
+            margin-top: 0;
+            text-align: center;
+        }
+        h1 {
+            font-weight: 25; /* 粗體 */
+            font-size: 70px; /* 字體大小 */
+            color: $color-black;
+            font-family: $font-family-primary;
+
+            @media (max-width: 820px) {
+                font-size: calc($font-size-title * 0.8); /* 縮小字體大小 */
+            }
+        
+            @media (max-width: 768px) {
+                font-size: calc($font-size-title * 0.8); /* 縮小字體大小 */
+            }
+        
+            @media (max-width: 480px) {
+                font-size: calc($font-size-title * 0.4); /* 手機字體更小 */
+            }
+        }
+        
+        p {
+            font-size: $font-size-content;
+            font-weight: bold;
+            color: $color-dark-gray;
+            @media (max-width: 820px) {
+                font-size: calc($font-size-content * 0.8); /* 縮小字體大小 */
+            }
+        
+            @media (max-width: 768px) {
+                font-size: calc($font-size-content * 0.8); /* 縮小字體大小 */
+            }
+        
+            @media (max-width: 480px) {
+                font-size: calc($font-size-content * 0.6); /* 手機字體更小 */
+            }
+        }
+    }
+    .intro-right {
+        flex: 1;
+        margin-top: 80px;
+        padding-left: 100px;
+        @media (max-width: 820px) {
+            padding-left: 0;
+
+        }
+        @media (max-width: 768px) {
+            padding-left: 0;
+            margin-top: 0px;
+        }
+        p{
+            font-size: $font-size-content;
+            color: #555;
+            line-height: 1.6;
+            @media (max-width: 768px) {
+                font-size: calc($font-size-content * 0.9); /* 縮小段落字體 */
+            }
+        
+            @media (max-width: 480px) {
+                font-size: calc($font-size-content * 0.8); /* 手機段落更小 */
+            }
+        }
+        h1 {
+            font-weight: bold;
+            color: $color-black;
+        }
+    }
+}
+

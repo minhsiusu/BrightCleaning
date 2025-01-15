@@ -1,0 +1,89 @@
+@use '../_colors.scss' as *;
+@use '../_variables.scss' as *;
+@use '../_mixins.scss'as *;
+
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); // 半透明背景
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 450px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+
+        h1 {
+            font-size: 24px;
+            margin: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+
+            li {
+            margin-bottom: 8px;
+            font-size: 20px;
+            }
+        }
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+    .popup {
+        padding: 15px 20px;
+
+        h1 {
+        font-size: 20px;
+        margin: 15px;
+        }
+
+        p {
+        font-size: 18px;
+        }
+
+        ul li {
+        font-size: 18px;
+        }
+    }
+    }
+
+    @media (max-width: 480px) {
+    .popup {
+        padding: 10px 15px;
+
+        h1 {
+        font-size: 18px;
+        margin: 10px;
+        }
+
+        p {
+        font-size: 16px;
+        }
+
+        ul li {
+        font-size: 16px;
+        }
+    }
+}

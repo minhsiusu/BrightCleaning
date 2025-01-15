@@ -1,0 +1,89 @@
+// src/styles/header/_dropdown-styles.scss
+@use '../_colors.scss' as *;
+@use '../_variables.scss' as *;
+
+.account-menu,
+.store-menu {
+    position: absolute;
+    top: 80%;
+    background-color: $background-color;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px $shadow-color;
+    border-radius: $border-radius-small;
+    width: 150px; // 預設寬度
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 768px) {
+        width: 90px; // 小螢幕縮小寬度
+        left: 50%; // 讓選單水平居中
+        top: 85%;
+    }
+}
+
+.account-menu {
+    left: 0;
+    transform: translateX(-20%);
+
+    @media (max-width: 768px) {
+
+        transform: translateX(-30%); // 小螢幕下居中
+    }
+}
+
+.store-menu {
+    left: 0;
+    transform: translateX(40%);
+
+    @media (max-width: 768px) {
+        transform: translateX(0%); // 小螢幕下居中
+    }
+}
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+
+    a {
+        padding: 10px;
+        text-decoration: none;
+        color: $text-color;
+        border-bottom: 1px solid #ddd;
+        &:hover {
+            background-color: #f4f4f4;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 12px; // 小螢幕縮小字體
+            padding: 8px; // 縮小內部間距
+        }
+    }
+
+    .user-info {
+        padding: 10px;
+        font-weight: bold;
+        background-color: #f9f9f9;
+        border-bottom: 1px solid #ddd;
+
+        @media (max-width: 768px) {
+            font-size: 12px; // 縮小字體大小
+            padding: 8px;
+        }
+    }
+
+    .logout {
+        padding: 10px;
+        color: red;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ffdddd;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 12px;
+            padding: 8px;
+        }
+    }
+}

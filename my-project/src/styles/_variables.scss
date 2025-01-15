@@ -1,0 +1,48 @@
+// src/styles/_variables.scss
+
+// 斷點設置
+$breakpoints: (
+  small: 576px,   // 手機
+  medium: 768px,  // 平板
+  large: 992px,   // 小型桌面
+  xlarge: 1200px  // 大型桌面
+);
+// 字體
+$font-family-primary: 'MantouSans-Regular', sans-serif;
+$font-family-secondary: 'Montserrat', sans-serif;
+$font-family-modern: 'Poppins', sans-serif;
+
+$font-size-base: 16px;
+$font-size-title: 70px;
+$font-size-subtitle: 40px;
+$font-size-content: 24px;
+$font-size-small: 18px;
+$font-size-link: 16px;
+$font-size-button: 16px;
+// 間距與邊框
+$padding-container: 20px;
+$padding-small: 20px;
+$padding-extra-small: 10px;
+$padding-standard: 50px;
+$padding-large: 150px;
+$padding-input: 10px;
+
+$spacing-small: 8px;
+$spacing-medium: 16px;
+$spacing-large: 30px;
+
+$border-radius-small: 4px;
+$border-radius-medium: 8px;
+$margin-container: 50px auto;
+$margin-input: 20px;
+$margin-top-register: 130px;
+
+$portfolio-gap: 50px; //  Portfolio 區塊的間距
+$portfolio-gap-small: 30px; //  Portfolio 區塊的間距
+$portfolio-img-radius: 8px; //  Portfolio 圖片圓角半徑
+$testimonial-card-padding: 20px; // Testimonials 區塊的卡片內距
+$menu-width: 250px;
+
+// 過渡
+$transition-fast: 0.3s ease;
+$max-width-login: 400px;
